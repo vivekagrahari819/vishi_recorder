@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Screen Recorder</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Screen Recorder</h1>
+    
+    <div class="container">
+        <!-- Left Section: Video Recording -->
+        <div class="recorder-section">
+            <h2>Record New Video</h2>
+            <button id="startBtn">Start Recording</button>
+            <button id="stopBtn" disabled>Stop Recording</button>
+            
+            <video id="videoPreview" controls></video>
+            <p id="status"></p>
+        </div>
+
+        <!-- Right Section: Recorded Videos -->
+        <div class="video-list-section">
+            <h2>Recorded Videos</h2>
+            <div id="videoList">
+                <!-- Display the list of recorded videos with delete buttons -->
+                {% for video in videos %}
+                    <div class="video-item">
+                        <video src="{{ url_for('uploaded_video', filename=video) }}" controls></video>
+                        <button class="deleteBtn" data-filename="{{ video }}">Delete</button>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/recorder.js') }}"></script>
+</body>
+</html>
